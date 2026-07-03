@@ -1384,10 +1384,16 @@
     label.textContent = 'Traitement en cours…';
 
     try {
-      const res = await fetch('/api/donations/create', {
+      const res = await fetch('/.netlify/functions/create-transaction', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ amount: selectedAmount, firstname, lastname, email }),
+        body: JSON.stringify({
+          amount: selectedAmount,
+          firstname: firstnameInput.value.trim(),
+          lastname: lastnameInput.value.trim(),
+          email: emailInput.value.trim(),
+          phone: ""
+        })
       });
 
       if (!res.ok) {
